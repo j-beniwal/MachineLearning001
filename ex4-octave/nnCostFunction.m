@@ -63,23 +63,47 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+X = X';
+% make y into a matrix
+y_matrix = eye(num_labels)(y,:);
 
 
+a1 = [ones(1, size(X,2)); X];
+a2 = sigmoid(Theta1 * a1);
+a2 = [ones(1, size(a2,2)); a2];
+a3 = sigmoid(Theta2 * a2);
+a3 = a3';
+
+[max_val, max_index] = max(a3, [], 2);
+h0 = max_index;
+
+J = 1/m * sum(sum(-y_matrix .* log(a3) - (1 - y_matrix) .* log(1 - a3)));
+% regularization
+J = J + lambda/(2*m) * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
+
+% backpropagation
+grad1 = zeros(size(Theta1));
+grad2 = zeros(size(Theta2));
+for t = 1:m
+  a1 = [1; X(:,t)];
+  z2 = Theta1 * a1;
+  a2 = [1; sigmoid(z2)];
+  z3 = Theta2 * a2;
+  a3 = sigmoid(z3);
+  delta3 = a3 - y_matrix(t,:)';
+  delta2 = Theta2(:,2:end)' * delta3 .* sigmoidGradient(z2);
+  grad1 = grad1 +  delta2 * a1';
+  grad2 = grad2 + delta3 * a2';
+
+endfor
+
+Theta1_grad = 1/m * grad1;
+Theta2_grad = 1/m * grad2;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+% regularization
+Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + lambda/m * Theta1(:,2:end);
+Theta2_grad(:,2:end) = Theta2_grad(:,2:end) + lambda/m * Theta2(:,2:end);
 % -------------------------------------------------------------
 
 % =========================================================================

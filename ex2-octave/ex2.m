@@ -29,7 +29,7 @@ X = data(:, [1, 2]); y = data(:, 3);
 %% ==================== Part 1: Plotting ====================
 %  We start the exercise by first plotting the data to understand the 
 %  the problem we are working with.
- 
+
 fprintf(['Plotting data with + indicating (y = 1) examples and o ' ...
          'indicating (y = 0) examples.\n']);
 
@@ -135,7 +135,7 @@ pause;
 
 %  Predict probability for a student with score 45 on exam 1 
 %  and score 85 on exam 2 
-
+ 
 prob = sigmoid([1 45 85] * theta);
 fprintf(['For a student with scores 45 and 85, we predict an admission ' ...
          'probability of %f\n'], prob);

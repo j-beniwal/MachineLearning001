@@ -7,7 +7,7 @@
 %  of the exercise which covers regularization with logistic regression.
 %
 %  You will need to complete the following functions in this exericse:
-%
+% 
 %     sigmoid.m
 %     costFunction.m
 %     predict.m
@@ -107,7 +107,7 @@ pause;
 initial_theta = zeros(size(X, 2), 1);
 
 % Set regularization parameter lambda to 1 (you should vary this)
-lambda = 1;
+lambda = 0;
 
 % Set Options
 options = optimset('GradObj', 'on', 'MaxIter', 400);

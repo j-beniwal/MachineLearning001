@@ -70,7 +70,7 @@ nn_params = [Theta1(:) ; Theta2(:)];
 %  will get to implement the regularized cost.
 %
 fprintf('\nFeedforward Using Neural Network ...\n')
-
+ 
 % Weight regularization parameter (we set this to 0 here).
 lambda = 0;
 
